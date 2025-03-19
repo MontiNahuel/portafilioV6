@@ -1,0 +1,144 @@
+/* Contenedor principal */
+.estudio {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: transparent;
+  }
+  
+  /* Caja de información con fondo oscuro */
+  .estudio__info {
+    width: 420px;
+    height: 250px;
+    background: rgba(20, 20, 20, 0.9); /* Negro con opacidad */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.6);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .estudio__icono__fondo {
+    position: absolute;
+    width: 450px;
+    filter: opacity(0);
+    transition: .3s;
+  }
+
+  .estudio__info:hover .estudio__icono__fondo {
+    filter: opacity(.035);
+  }
+  
+  /* Título */
+  .estudio__title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 8px;
+    height: 50px;
+  }
+  
+  /* Institución */
+  .estudio__institution {
+    font-size: 18px;
+    color: #bbb;
+    margin-bottom: 5px;
+  }
+  
+  /* Fechas */
+  .estudio__date {
+    font-size: 16px;
+    color: #888;
+    margin-bottom: 10px;
+  }
+
+  .estudio__status__vermas {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .estudio__vermas {
+    background: #007bff; /* Color azul */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 12px; /* Tamaño de fuente más pequeño */
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    display: inline-block;
+    text-align: center;
+    min-width: 80px; /* Evita que se haga demasiado chico */
+    height: 39px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+  }
+
+  .estudio__vermas:hover {
+    background: #0056b3; /* Color azul más oscuro */
+  }
+
+  .estudio__certificado {
+    background-color: #52c7e1;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 12px; /* Tamaño de fuente más pequeño */
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    display: inline-block;
+    z-index: 1;
+    text-align: center;
+    min-width: 90px; /* Evita que se haga demasiado chico */
+    height: 39px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .estudio__certificado:hover {
+    background-color: #3e9dbf;
+  }
+
+  /* Estado del estudio */
+  .estudio__status {
+    font-size: 14px;
+    font-weight: bold;
+    padding: 8px 12px;
+    border-radius: 5px;
+    display: inline-block;
+  }
+  
+  /* Colores según el estado del estudio */
+  .estudio__status--completado {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .estudio__status--en-curso {
+    background-color: #ff9800;
+    color: white;
+  }
+  
+  .estudio__status--pendiente {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .estudio__info {
+      max-width: 90%;
+    }
+  }
+  

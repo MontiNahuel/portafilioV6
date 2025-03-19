@@ -1,0 +1,100 @@
+/* Contenedor principal */
+.intro {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;  /* Asegura que ocupe el ancho completo */
+  height: 80svh; /* Asegura que ocupe el alto completo */
+  margin: 0;
+  text-align: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 1s ease, transform 1s ease;
+  overflow: hidden; /* Previene posibles desplazamientos */
+  -webkit-mask-image: linear-gradient(to bottom, rgb(0, 0, 0) 60%, rgba(0, 0, 0, 0) 100%);
+  mask-image: linear-gradient(to bottom, rgb(3, 3, 3) 75%, rgba(0, 0, 0, 0) 100%);
+}
+
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.788);
+  }
+  
+  /* Animación al cargar */
+  .intro.visible {
+    opacity: 1;
+  }
+  
+  /* Contenido del texto */
+  .intro-content {
+    position: relative;
+    padding: 20px 40px;
+    border-radius: 10px;
+    color: white;
+    transform: translateY(0);
+    opacity: 1;
+    transition: opacity 1s ease, transform 1s ease;
+  }
+  
+  /* Estilos del título */
+  .intro h1 {
+    font-size: 48px;
+    margin-bottom: 10px;
+  }
+  
+  .highlight {
+    color: #00bcd4;
+  }
+  
+  /* Estilos del párrafo */
+  .intro p {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  
+  /* Botón de acción */
+  .cta-button {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+    background-color: #00bcd4;
+    border: 1px solid #00bcd4;
+    border-radius: 5px;
+    transition: 0.3s ease;
+    margin-right: 15px;
+  }
+
+  .cv-button {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #00bcd4;
+    background-color: none;
+    border: 1px solid #00bcd4;
+    border-radius: 5px;
+    transition: 0.3s ease;
+    margin-right: 15px;
+  }
+  
+  .cta-button:hover {
+    background-color: #008ba3;
+    border-color: #008ba3;
+  }
+
+  .cv-button:hover {
+    border: 1px solid #008ba3af;
+  }
+  

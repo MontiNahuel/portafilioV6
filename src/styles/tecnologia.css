@@ -1,0 +1,14 @@
+.tecnologia__individual__icono {
+    width: 75px;
+    height: 75px;
+    margin: 0 auto;
+    filter: invert(0.8);
+}
+
+.tecnologia__individual__nombre {
+    font-size: 18px;
+    font-weight: bold;
+    color: #f4f4f4;
+    margin-top: 10px;
+    text-align: center;
+}

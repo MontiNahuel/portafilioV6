@@ -1,0 +1,26 @@
+.aboutMe {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #1a1a1a;
+    color: #f4f4f4;
+    padding: 10vh 0;
+}
+
+.aboutMe__tecnologias__titulo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #f4f4f4;
+    margin-top: 10vh;
+    margin-bottom: 5vh;
+}
+
+.aboutMe__tecnologias__lista {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    gap: 100px;
+    padding: 0;
+}

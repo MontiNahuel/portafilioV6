@@ -1,0 +1,53 @@
+/* Estilos base */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 0;
+    background-color: transparent;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    z-index: 1000;
+  }
+  
+  /* Contenedor de la barra */
+  .nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  /* Estilo cuando se hace scroll */
+  .navbar.scrolled {
+    background-color: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Logo */
+  .logo {
+    filter: invert(0.9);
+    height: 36px;
+    width: auto;
+  }
+  
+  /* Estilos del menú */
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin: 10px 0;
+  }
+  
+  .nav-links li a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-links li a:hover {
+    color: #00bcd4;
+  }
+  

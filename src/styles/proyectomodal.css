@@ -1,0 +1,154 @@
+/* Fondo oscuro semitransparente */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    overflow: auto;
+  }
+  
+  /* Contenido del modal */
+  .modal-content {
+    background: #1e1e1e;
+    color: white;
+    padding: 20px 40px;
+    border-radius: 10px;
+    width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    text-align: center;
+    position: relative;
+  }
+  
+  /* Imagen dentro del modal */
+  .modal-image {
+    width: 80%;
+    height: 220px;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+
+  .modal__descripcion {
+    font-size: 16px;
+    text-align: justify;
+    margin: 10px 0;
+  }
+
+  .modal__enlaces {
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .modal__enlace__boton {
+    width: 150px;
+    background: #1e1e1e;
+    color: white;
+    border: 1px solid white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+  }
+  
+  /* Hover: Cambio de color y efecto en el borde */
+  .modal__enlace__boton:hover {
+    background: #f4f4f4;
+    color: #1e1e1e;
+    border: 1px solid #1e1e1e;
+    transform: scale(1.05); /* Efecto de crecimiento ligero */
+  }
+
+  .modal__enlace__boton:hover .modal__enlaces__icono {
+    filter: invert(0.25);
+  }
+  
+  /* Efecto al hacer click */
+  .modal__enlace__boton:active {
+    transform: scale(0.95); /* Reduce el tamaño al hacer click */
+  }
+
+  .modal__enlaces__icono {
+    height: 60px;
+    width: 60px;
+    filter: invert(0.8); 
+    transition: .3s;
+  }
+
+  .modal__tecnologias__titulo {
+    font-size: 24px;
+    margin-top: 40px;
+  }
+
+  .modal__tecnologia-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0;
+    width: 120px;
+    border-radius: 5px;
+    border: 1px solid #1e1e1e;
+    transition: .5s;
+  }
+
+  .modal__icono {
+    width: 60px;
+    height: 60px;
+    filter: invert(0.8);
+    padding-top: 10px;
+  }
+
+  .modal__tecnologias {
+    font-size: 16px;
+    text-align: justify;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding: 0;
+  }
+
+  .modal__tecnologia {
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    list-style: none;
+  }
+
+
+  /* Botón de cerrar */
+  .modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  .modal-close:hover {
+    color: red;
+  }
+  

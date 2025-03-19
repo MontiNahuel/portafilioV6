@@ -1,0 +1,10 @@
+.proyects__container .proyects__title {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+.proyects__container .proyects {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
