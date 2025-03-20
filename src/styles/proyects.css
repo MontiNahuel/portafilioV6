@@ -1,5 +1,9 @@
 .proyects__container .proyects__title {
     font-size: 48px;
+    color: #fff;
+    opacity: .8;
+    font-weight: 500;
+    font-family: "Ubuntu", sans-serif;
     margin-bottom: 10px;
 }
 .proyects__container .proyects {

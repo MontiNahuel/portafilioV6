@@ -37,6 +37,7 @@
 
   .modal__descripcion {
     font-size: 16px;
+    font-family: "Montserrat", sans-serif;
     text-align: justify;
     margin: 10px 0;
   }
@@ -56,6 +57,8 @@
     width: 150px;
     background: #1e1e1e;
     color: white;
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 400;
     border: 1px solid white;
     padding: 10px 20px;
     border-radius: 5px;
@@ -95,6 +98,7 @@
 
   .modal__tecnologias__titulo {
     font-size: 24px;
+    font-family: "Ubuntu", sans-serif;
     margin-top: 40px;
   }
 
@@ -119,7 +123,8 @@
   }
 
   .modal__tecnologias {
-    font-size: 16px;
+    font-size: 15px;
+    font-family: "Montserrat", sans-serif;
     text-align: justify;
     display: flex;
     justify-content: center;

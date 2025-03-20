@@ -42,12 +42,15 @@
 
 /* Título */
 .proyect__title {
-    font-size: 24px;
+    font-size: 1.5rem;
+    font-family: "Ubuntu", sans-serif;
     color: #fff;
+    opacity: .8;
 }
   
 .proyect__description {
     font-size: 16px;
+    font-family: "Montserrat", sans-serif;
     color: #bbb; /* Gris claro para mejor lectura */
 }
 
@@ -60,7 +63,8 @@
 /* Estado del proyecto */
 .proyect__status {
   font-size: 14px;
-  font-weight: bold;
+  font-weight: 500;
+  font-family: "Ubuntu", sans-serif;
   padding: 8px 12px;
   border-radius: 5px;
   width: fit-content;
@@ -87,8 +91,9 @@
   border: none;
   padding: 6px 10px; /* Reducimos el padding */
   border-radius: 5px;
-  font-size: 12px; /* Tamaño de fuente más pequeño */
-  font-weight: bold;
+  font-size: 14px; /* Tamaño de fuente más pequeño */
+  font-weight: 500;
+  font-family: "Ubuntu", sans-serif;
   cursor: pointer;
   transition: background 0.3s ease;
   display: inline-block;

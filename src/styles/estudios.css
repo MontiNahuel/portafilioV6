@@ -7,8 +7,9 @@
 }
 
 .estudios__titulo {
-    font-size: 24px;
-    font-weight: bold;
+    font-size: 2rem;
+    font-weight: 500;
+    font-family: "Ubuntu", sans-serif;
     color: #f4f4f4;
     margin-bottom: 20px;   
 }

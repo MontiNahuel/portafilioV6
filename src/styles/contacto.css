@@ -16,6 +16,8 @@
   .contact__title {
     font-size: 2rem;
     margin-bottom: 10px;
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 500;
   }
 
   .contact__content {
@@ -29,6 +31,7 @@
     font-size: 1.5rem;
     margin-bottom: 20px;
     opacity: 0.8;
+    font-family: "Montserrat", sans-serif;
   }
   
   .contact__form {
@@ -45,6 +48,7 @@
     background: transparent;
     color: #f4f4f4;
     font-size: 1rem;
+    font-family: "Montserrat", sans-serif;
   }
 
   .contact__input {
@@ -65,16 +69,13 @@
     color: #b9b9b9;
     border-radius: 2px;
     transition: 0.3s ease-out;
+    height: 120px;
+    resize: none;
   }
 
   .contact__textarea:focus {
     outline: none;
     background-color: #383838;
-  }
-  
-  .contact__textarea {
-    height: 120px;
-    resize: none;
   }
   
   .contact__button {
@@ -83,9 +84,11 @@
     border: none;
     padding: 12px;
     border-radius: 5px;
-    font-size: 1rem;
+    font-size: 1.2rem;
     cursor: pointer;
     transition: all 0.3s ease;
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 500;
   }
   
   .contact__button:hover {

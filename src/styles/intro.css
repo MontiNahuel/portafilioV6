@@ -47,6 +47,8 @@
   /* Estilos del título */
   .intro h1 {
     font-size: 48px;
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 500;
     margin-bottom: 10px;
   }
   
@@ -58,6 +60,7 @@
   .intro p {
     font-size: 20px;
     margin-bottom: 20px;
+    font-family: "Montserrat", sans-serif;
   }
   
   /* Botón de acción */
@@ -65,7 +68,8 @@
     display: inline-block;
     padding: 12px 24px;
     font-size: 18px;
-    font-weight: bold;
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 400;
     text-decoration: none;
     color: white;
     background-color: #00bcd4;
@@ -79,7 +83,8 @@
     display: inline-block;
     padding: 12px 24px;
     font-size: 18px;
-    font-weight: bold;
+    font-weight: 400;
+    font-family: "Ubuntu", sans-serif;
     text-decoration: none;
     color: #00bcd4;
     background-color: none;
