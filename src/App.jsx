@@ -1,3 +1,5 @@
+import backgroundGif from '../src/assets/backgroundIntro.gif'; 
+
 import './App.css'
 import Intro from './components/Intro'
 import Navbar from './components/Navbar'
@@ -12,7 +14,7 @@ function App() {
   return (
     <>
       <Navbar/>
-      <Intro backgroundImage="../src/assets/backgroundIntro.gif"/>
+      <Intro backgroundImage={backgroundGif}/>
       <Proyects/>
       <AboutMe/>
       <Estudios/>
