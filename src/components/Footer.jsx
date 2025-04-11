@@ -15,7 +15,7 @@ function Footer() {
                     {hipervFooter[1].map((hipervinculo, index) => (
                         <li key={index} className="footer__hipervinculos__item">
                             <a href={hipervinculo.url} className="footer__hipervinculo" target="_blank" rel="noreferrer noopener">
-                                <img src={`src/assets/icons/${hipervinculo.icono}.svg`} alt="" className="footer__hipervinculo__icono"/>
+                                <img src={hipervinculo.icono} alt="" className="footer__hipervinculo__icono"/>
                             </a>
                         </li>
                     ))}
