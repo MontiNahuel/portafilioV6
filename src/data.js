@@ -8,6 +8,9 @@ import imagenSqlServer from "../src/assets/icons/sql-server.svg";
 import imagenJava from "../src/assets/icons/java.svg";
 import imagenSpringBoot from "../src/assets/icons/springboot.svg";
 import imagenReact from "../src/assets/icons/react-native.svg";
+import imagenJavaScript from "../src/assets/icons/javascript.svg";
+import imagenElectron from "../src/assets/icons/electron.svg";
+import imagenNeDB from "../src/assets/icons/nedb.svg";
 import imagenFirebase from "../src/assets/icons/firebase.svg";
 import imagenNodeJs from "../src/assets/icons/node-js.svg";
 import imagenNeo4j from "../src/assets/icons/neo4j.svg";
@@ -45,6 +48,13 @@ export const proyectosIntroduccion = [
         descripcionProyecto: "Backend desarrollado para un ecommerce con todas sus funcionalidades básicas, utilizando dos bases de datos.",
         imagenProyecto: imagenEcommerce,
         estadoProyecto: "Completado"
+    },
+    {
+        id: 4,
+        nombreProyecto: "Aplicación de administración de un negocio",
+        descripcionProyecto: "Aplicación de escritorio desarrollada para la administración de un negocio, permitiendo registrar productos, ventas y clientes.",
+        imagenProyecto: imagenGestionStock,
+        estadoProyecto: "Completado (Recibiendo actualizaciones)"
     }
 ]
 
@@ -56,7 +66,7 @@ export const proyectos = [
       Cada persona cuenta con su propio usuario dentro de la aplicación, que se divide en dos categorías: vecino e inspector; este último solamente tiene la posibilidad de validar o generar los reclamos con los que esté enlazado.`,
       imagenProyecto: imagenMunicipio,
       estadoProyecto: "Completado",
-      enlaces: [{repositorio: "FrontEnd", url: "https://github.com/MontiNahuel/TPO-DA1-Front-End", icono: "../src/assets/icons/github.svg"}, {repositorio: "BackEnd", url: "https://github.com/MontiNahuel/TPO-DA1-Back-End", icono: "../src/assets/icons/github.svg"}],
+      enlaces: [{repositorio: "FrontEnd", url: "https://github.com/MontiNahuel/TPO-DA1-Front-End", icono: imagenGithub}, {repositorio: "BackEnd", url: "https://github.com/MontiNahuel/TPO-DA1-Back-End", icono: imagenGithub}],
       tecnologias: [{nombre: "React-Native", icono: imagenReact}, {nombre: "SpringBoot", icono: imagenSpringBoot}, {nombre: "Java", icono: imagenJava}, {nombre: "Sql-Server", icono: imagenSqlServer}]
     },
     {
@@ -65,7 +75,7 @@ export const proyectos = [
       descripcionProyecto: "Naciendo de una propuesta de idea innovadora, con un grupo de desarrollo se nos ocurrió plantear una solución a una problemática que no está bien cubierta, como puede ser la unión de músicos para formar una banda y/o cantantes con productores, etc.\n La idea es que los usuarios puedan crear un perfil, subir sus canciones, buscar otros usuarios y contactarlos para formar una banda, o simplemente para colaborar en un proyecto musical.",
       imagenProyecto: imagenBandUp,
       estadoProyecto: "Completado",
-      enlaces: [{repositorio: "FrontEnd y BackEnd", url: "https://github.com/MontiNahuel/BandUpFinalPrevio", icono: "../src/assets/icons/github.svg"}],
+      enlaces: [{repositorio: "FrontEnd y BackEnd", url: "https://github.com/MontiNahuel/BandUpFinalPrevio", icono: imagenGithub}],
       tecnologias: [{nombre: "React-Native", icono: imagenReact}, {nombre: "NodeJs", icono: imagenNodeJs}, {nombre: "Firebase", icono: imagenFirebase}]
     },
     {
@@ -74,7 +84,7 @@ export const proyectos = [
       descripcionProyecto: "Desarrollada para satisfacer las necesidades básicas de control de stock, permitiendo registrar cada producto individualmente, así como sus cantidades, nombre, precio, etc.\nPor otra parte permite registrar las ventas, con la posibilidad de seleccionar los productos que se vendieron y la cantidad de cada uno, generando un ticket con la información de la venta.",
       imagenProyecto: imagenGestionStock,
       estadoProyecto: "Completado",
-      enlaces: [{repositorio: "Aplicación", url: "https://github.com/MontiNahuel/TPO-POO-DesktopApp", icono: "../src/assets/icons/github.svg"}],
+      enlaces: [{repositorio: "Aplicación", url: "https://github.com/MontiNahuel/TPO-POO-DesktopApp", icono: imagenGithub}],
       tecnologias: [{nombre: "Java", icono: imagenJava}, {nombre: "Swing", icono: imagenEclipse}]
     },
     {
@@ -83,8 +93,17 @@ export const proyectos = [
       descripcionProyecto: "Desarrollado con la finalidad de crear una API que interactúe con mas de una base de datos, y que sean distintas entre sí, implementada inteligentemente para que sea escalable y fácil de mantener.\n Actualmente está en desarrollo un FrontEnd que interactúe con esta API ya que su funcionalidad está accesible a través de una consola.\nPermite la creación de un usuario, el cual tiene un carrito propio y permite agregar productos a este, además de poder realizar compras, registrar distintos métodos de pago y poder seleccionar cual se desea usar.\n Por otro lado cuenta con un usuario admin para poder visualizar las ventas, registrar productos, etc.",
       imagenProyecto: imagenEcommerce,
       estadoProyecto: "Completado",
-      enlaces: [{repositorio: "Backend", url: "https://github.com/MontiNahuel/TPO-IDD2-Back-End", icono: "../src/assets/icons/github.svg"}],
+      enlaces: [{repositorio: "Backend", url: "https://github.com/MontiNahuel/TPO-IDD2-Back-End", icono: imagenGithub}],
       tecnologias: [{nombre: "SpringBoot", icono: imagenSpringBoot}, {nombre: "Java", icono: imagenJava}, {nombre: "Neo4J", icono: imagenNeo4j}, {nombre: "MongoDB", icono: imagenMongoDB}]
+    },
+    {
+        Id: 5,
+        nombreProyecto: "Aplicación de administración de un negocio",
+        descripcionProyecto: "El proyecto mas completo hasta la fecha, nace de la necesidad de un cliente con la exigencia de una solución integral y personalizada, partiendo desde la base que se necesitaba desarrollar una solución que funcione completamente en entorno local, pero sin perder la facilidad de una app fácil de usar. Aplicación de escritorio desarrollada para la administración de un negocio, permitiendo registrar productos, ventas y clientes. Cuenta con una interfaz amigable y fácil de usar.",
+        imagenProyecto: imagenGestionStock,
+        estadoProyecto: "Completado (Recibiendo actualizaciones)",
+        enlaces: [{repositorio: "Demo", url: "https://github.com/MontiNahuel/TPO-IDD2-Back-End", icono: imagenGithub}],
+        tecnologias: [{nombre: "JavaScript", icono: imagenJavaScript}, {nombre: "React", icono: imagenReact}, {nombre: "Electron", icono: imagenElectron}, {nombre: "NeDB", icono: imagenNeDB}]
     }
   ];
 
