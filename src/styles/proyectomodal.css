@@ -55,15 +55,11 @@
 
   .modal__enlace__boton {
     width: 150px;
-    background: #1e1e1e;
-    color: white;
     font-family: "Ubuntu", sans-serif;
     font-weight: 400;
-    border: 1px solid white;
     padding: 10px 20px;
     border-radius: 5px;
     font-size: 16px;
-    cursor: pointer;
     transition: all 0.3s ease-in-out;
     display: flex;
     justify-content: center;
@@ -71,16 +67,30 @@
     gap: 1rem;
     text-decoration: none;
   }
+
+  .modal__enlace__boton__enabled {
+    background: #1e1e1e;
+    color: white;
+    border: 1px solid white;
+    cursor: pointer;
+  }
+
+  .modal__enlace__boton__disabled {
+    background: #333;
+    color: #888;
+    border: 1px solid #555;
+    cursor: not-allowed;
+  }
   
   /* Hover: Cambio de color y efecto en el borde */
-  .modal__enlace__boton:hover {
+  .modal__enlace__boton__enabled:hover {
     background: #f4f4f4;
     color: #1e1e1e;
     border: 1px solid #1e1e1e;
     transform: scale(1.05); /* Efecto de crecimiento ligero */
   }
 
-  .modal__enlace__boton:hover .modal__enlaces__icono {
+  .modal__enlace__boton__enabled:hover .modal__enlaces__icono {
     filter: invert(0.25);
   }
   

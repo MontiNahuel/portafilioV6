@@ -2,8 +2,9 @@ import React, {useState} from "react";
 import "../styles/proyect.css";
 import "../styles/proyectomodal.css"
 import {proyectos} from "../data";
+import imagenGithub from "../assets/icons/github.svg";
 
-function Proyect({id, nombreProyecto, descripcionProyecto, imagenProyecto, estadoProyecto }) {
+function Proyect({id, nombreProyecto, descripcionProyecto, imagenProyecto, estadoProyecto}) {
 
   const [verMas, setVerMas] = useState(false);
 
@@ -29,7 +30,7 @@ function Proyect({id, nombreProyecto, descripcionProyecto, imagenProyecto, estad
           </div>
         </div>
       </div>
-      {verMas && <ProyectoModal id={id} onClose={handleClick}/>}
+      {verMas && <ProyectoModal id={id} onClose={handleClick} />}
     </section>
   );
 }
@@ -47,19 +48,24 @@ function ProyectoModal ({id, onClose}) {
         ))}
         <h3 className="modal__enlaces__titulo">Enlaces:</h3>
         <ul className="modal__enlaces">
-          {proyectos[id].enlaces.map((enlace, index) => (
-            <li key={index} className="modal__enlace">
-              <a
-                href={enlace.url}
-                target="_blank"
-                rel="noreferrer"
-                className="modal__enlace__boton"
-              >
-                {enlace.repositorio}
-                <img className="modal__enlaces__icono" src={enlace.icono} alt="" />
-              </a>
-            </li>
-          ))}
+          {proyectos[id].enlaces?
+            proyectos[id].enlaces.map((enlace, index) => (
+              <li key={index} className="modal__enlace">
+                <a
+                  href={enlace.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={`modal__enlace__boton modal__enlace__boton__enabled`}
+                >
+                  {enlace.repositorio}
+                  <img className="modal__enlaces__icono" src={enlace.icono} alt="" />
+                </a>
+              </li>
+          ))
+          : (
+            <p className="modal__enlace__boton modal__enlace__boton__disabled">No hay enlaces disponibles <img className="modal__enlaces__icono" src={imagenGithub} alt="" /> </p>
+          )
+        }
         </ul>
         <h3 className="modal__tecnologias__titulo">Tecnologías utilizadas:</h3>
         <ul className="modal__tecnologias">

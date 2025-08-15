@@ -9,6 +9,7 @@
   
   /* Caja de información con fondo oscuro */
   .estudio__info {
+    position: relative;
     width: 420px;
     height: 250px;
     background: rgba(20, 20, 20, 0.9); /* Negro con opacidad */
@@ -23,15 +24,27 @@
     flex-direction: column;
   }
 
+
   .estudio__icono__fondo {
     position: absolute;
-    width: 450px;
-    filter: opacity(0);
-    transition: .3s;
+    top: 0;
+    left: 20px;
+    width: 90%;
+    height: 100%;
+    max-width: 100%; /* Asegura que no sea más ancho que el contenedor */
+    max-height: 100%; /* Asegura que no sea más alto que el contenedor */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 0;
+    object-fit: contain; /* Para que la imagen se ajuste dentro sin recortar y manteniendo su proporción */
   }
 
   .estudio__info:hover .estudio__icono__fondo {
-    filter: opacity(.035);
+    opacity: 0.035;
+  }
+
+  .estudio__info__distinta__opacidad:hover .estudio__icono__fondo {
+    opacity: 0.055;
   }
   
   /* Título */

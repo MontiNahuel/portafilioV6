@@ -4,6 +4,8 @@ import imagenGestionStock from "../src/assets/gestion-de-stock.jpg";
 import imagenEcommerce from "../src/assets/ecommerceBackEnd.jpeg";
 import imagenUADE from "../src/assets/icons/UADE-log.svg";
 import imagenCodoACodo from "../src/assets/icons/codoacodo.png";
+import imagenRedHat from "../src/assets/icons/redhatV6.png";
+import imagenIbm from "../src/assets/icons/ibm.png";
 import imagenSqlServer from "../src/assets/icons/sql-server.svg";
 import imagenJava from "../src/assets/icons/java.svg";
 import imagenSpringBoot from "../src/assets/icons/springboot.svg";
@@ -102,7 +104,7 @@ export const proyectos = [
         descripcionProyecto: "El proyecto mas completo hasta la fecha, nace de la necesidad de un cliente con la exigencia de una solución integral y personalizada, partiendo desde la base que se necesitaba desarrollar una solución que funcione completamente en entorno local, pero sin perder la facilidad de una app fácil de usar. Aplicación de escritorio desarrollada para la administración de un negocio, permitiendo registrar productos, ventas y clientes. Cuenta con una interfaz amigable y fácil de usar.",
         imagenProyecto: imagenGestionStock,
         estadoProyecto: "Completado (Recibiendo actualizaciones)",
-        enlaces: [{repositorio: "Demo", url: "https://github.com/MontiNahuel/TPO-IDD2-Back-End", icono: imagenGithub}],
+        //enlaces: [{repositorio: "Demo", url: "https://github.com/MontiNahuel/TPO-IDD2-Back-End", icono: imagenGithub}],
         tecnologias: [{nombre: "JavaScript", icono: imagenJavaScript}, {nombre: "React", icono: imagenReact}, {nombre: "Electron", icono: imagenElectron}, {nombre: "NeDB", icono: imagenNeDB}]
     }
   ];
@@ -123,7 +125,7 @@ export const estudios = [
         nombreEstudio: "Licenciatura en Gestión de Tecnología de la Información",
         lugarEstudio: "Universidad Argentina de la Empresa",
         fechaInicio: "2025",
-        fechaFin: "2027 (Estimado)",
+        fechaFin: "2026 (Estimado)",
         estado: "En-curso",
         logoInstitucion: imagenUADE,
         verMas: "https://www.uade.edu.ar/facultad-de-ingenieria-y-ciencias-exactas/licenciatura-en-gestion-de-tecnologia-de-la-informacion/"
@@ -138,6 +140,29 @@ export const estudios = [
         logoInstitucion: imagenCodoACodo,
         verMas: "https://aulasvirtuales.bue.edu.ar/",
         certificado: "https://drive.google.com/file/d/17zt6PNdnr21K_8IjAzVTBZGOzvnJreCm/view"
+    },
+    {
+        id: 3,
+        nombreEstudio: "Curso de Administración de Sistemas Operativos Linux",
+        lugarEstudio: "RedHat",
+        fechaInicio: "Ago 2024",
+        fechaFin: "Dic 2024",
+        estado: "Completado",
+        logoInstitucion: imagenRedHat,
+        distintaOpacidad: true,
+        verMas: "https://www.redhat.com/en",
+        certificado: "https://drive.google.com/file/d/1t7J0OrVKMOp6Dw5-J-TSLNgoyNAkaP1v/view"
+    },
+    {
+        id: 4,
+        nombreEstudio: "Curso de Ciberseguridad y Seguridad de la Información",
+        lugarEstudio: "IBM",
+        fechaInicio: "Ago 2025",
+        fechaFin: "Dic 2025 (Estimado)",
+        estado: "En-curso",
+        logoInstitucion: imagenIbm,
+        distintaOpacidad: true,
+        verMas: "https://skillsbuild.org/",
     }
 ];
 

@@ -1,10 +1,10 @@
 import React from "react";
 import "../styles/estudio.css";
 
-function Estudio({nombreEstudio, lugarEstudio, fechaInicio, fechaFin, estado, logoInstitucion, verMas, certificado}) {
+function Estudio({nombreEstudio, lugarEstudio, fechaInicio, fechaFin, estado, logoInstitucion, verMas, certificado, distintaOpacidad}) {
     return (
         <section className="estudio">
-            <div className="estudio__info">
+            <div className={`estudio__info ${distintaOpacidad ? "estudio__info__distinta__opacidad" : ""}`}>
                 <img src={logoInstitucion} alt="" className="estudio__icono__fondo"/>
                 <h3 className="estudio__title">{nombreEstudio}</h3>
                 <p className="estudio__institution">{lugarEstudio}</p>
