@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "../styles/navbar.css"; // Importamos el archivo de estilos
+import logoPortafolio from "../assets/icons/portafolio.svg";
 export default function Navbar() {
   const [scrolling, setScrolling] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -20,7 +21,7 @@ export default function Navbar() {
   return (
     <nav className={`navbar ${scrolling ? "scrolled" : ""}`}>
       <div className="nav-container">
-        <img className="logo" src="src\assets\icons\portafolio.svg" alt="" />
+        <img className="logo" src={logoPortafolio} alt="Logo de portafolio" />
 
         {/* Botón hamburguesa (solo visible en mobile por CSS) */}
         <button

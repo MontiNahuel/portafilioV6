@@ -17,3 +17,9 @@
     position: relative;
     background-color: #161616;
 }
+
+@media (max-width: 960px) {
+    .contacto__lista {
+        width: 90%;
+    }
+}
