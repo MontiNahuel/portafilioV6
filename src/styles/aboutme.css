@@ -40,3 +40,9 @@
     gap: 100px;
     padding: 0;
 }
+
+@media (max-width: 960px) {
+    .aboutMe__tecnologias__lista {
+        gap: 60px;
+    }
+}

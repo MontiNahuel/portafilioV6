@@ -18,8 +18,10 @@ export default function Intro({ backgroundImage }) {
       <div className="intro-content">
         <h1>¡Hola! Soy <span className="highlight">Nahuel Monti</span></h1>
         <p>Desarrollador web Full Stack especializado en React y Java.</p>
-        <a href="#proyectos" className="cta-button">Ver Proyectos</a>
-        <a href="https://drive.google.com/file/d/1HVD9iAz1azPJKhVpz1jsgtphO5xbTFpQ/view?usp=drive_link" target="_blank" rel="noopener noreferrer" className="cv-button">Descargar CV</a>
+        <div className="buttons-intro">
+          <a href="#proyectos" className="cta-button">Ver Proyectos</a>
+          <a href="https://drive.google.com/file/d/1HVD9iAz1azPJKhVpz1jsgtphO5xbTFpQ/view?usp=drive_link" target="_blank" rel="noopener noreferrer" className="cv-button">Descargar CV</a>
+        </div>
       </div>
     </section>
   );

@@ -156,8 +156,13 @@
   
   /* Responsive */
   @media (max-width: 768px) {
+
+    .estudio {
+      padding: 20px 0px;
+    }
+
     .estudio__info {
-      max-width: 90%;
+      width: 100%;
     }
   }
   

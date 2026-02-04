@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "../styles/navbar.css"; // Importamos el archivo de estilos
 export default function Navbar() {
   const [scrolling, setScrolling] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -12,16 +13,33 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "auto";
+  }, [menuOpen]);
+
   return (
     <nav className={`navbar ${scrolling ? "scrolled" : ""}`}>
       <div className="nav-container">
         <img className="logo" src="src\assets\icons\portafolio.svg" alt="" />
-        <ul className="nav-links">
-          <li><a href="#inicio">Inicio</a></li>
-          <li><a href="#proyectos">Proyectos</a></li>
-          <li><a href="#sobre mi">Sobre Mi</a></li>
-          <li><a href="#estudios">Estudios</a></li>
-          <li><a href="#contacto">Contacto</a></li>
+
+        {/* Botón hamburguesa (solo visible en mobile por CSS) */}
+        <button
+          className={`hamburger ${menuOpen ? "open" : ""}`}
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Abrir menú"
+          aria-expanded={menuOpen}
+        >
+          <span>|</span>
+          <span>|</span>
+          <span>|</span>
+        </button>
+
+        <ul className={`nav-links ${menuOpen ? "active" : ""}`}>
+          <li><button className="boton-navbar" onClick={() => setMenuOpen(false)}><a href="#inicio">Inicio</a></button></li>
+          <li><button className="boton-navbar" onClick={() => setMenuOpen(false)}><a href="#proyectos">Proyectos</a></button></li>
+          <li><button className="boton-navbar" onClick={() => setMenuOpen(false)}><a href="#sobre mi">Sobre Mi</a></button></li>
+          <li><button className="boton-navbar" onClick={() => setMenuOpen(false)}><a href="#estudios">Estudios</a></button></li>
+          <li><button className="boton-navbar" onClick={() => setMenuOpen(false)}><a href="#contacto">Contacto</a></button></li>
         </ul>
       </div>
     </nav>

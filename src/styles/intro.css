@@ -2,9 +2,10 @@
 .intro {
   position: relative;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  width: 100vw;  /* Asegura que ocupe el ancho completo */
+  width: 100%;  /* Asegura que ocupe el ancho completo */
   height: 80svh; /* Asegura que ocupe el alto completo */
   margin: 0;
   text-align: center;
@@ -102,4 +103,24 @@
   .cv-button:hover {
     border: 1px solid #008ba3af;
   }
+
+@media (max-width: 960px)  {
+
+  .intro {
+    mask-image: none;
+    height: 100svh;
+  }
+
+  .overlay {
+    background: black;
+  }
+
+  .buttons-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+}
   

@@ -1,6 +1,7 @@
 /* Estilos base */
 .proyect {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   padding: 20px;
@@ -109,6 +110,14 @@
 /* Responsive */
 @media (max-width: 768px) {
   .proyect__container {
-    max-width: 90%;
+    width: 100%;
+  }
+
+  .proyect__title {
+    font-size: 16px;
+  }
+
+  .proyect__description {
+    font-size: 14px;
   }
 }
