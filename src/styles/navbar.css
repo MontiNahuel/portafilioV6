@@ -4,7 +4,6 @@
     top: 0;
     left: 0;
     width: 100%;
-    padding: 0;
     background-color: transparent;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
     z-index: 1000;
@@ -16,7 +15,7 @@
     justify-content: space-between;
     align-items: center;
     max-width: 1200px;
-    margin: 0 auto;
+    padding: 10px 20px 0;
   }
   
   /* Estilo cuando se hace scroll */
@@ -57,43 +56,53 @@
     color: #00bcd4;
   }
   
+/* Estilos básicos del botón para quitar bordes y fondo */
 .hamburger {
   display: none;
-  gap: 5px;
-  background: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 2rem;
+  height: 2rem;
+  background: transparent;
   border: none;
   cursor: pointer;
-  padding: 10px;
-  margin-right: 24px;
-  font-size: 24px;
-  transform: rotate(90deg);
-  z-index: 900;
+  padding: 0;
+  z-index: 10;
 }
 
-.hamburger span {
-  display: inline-block;
-  width: 6px;
-  height: 3px;
-  border-radius: 2px;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+/* Estilo de cada línea */
+.bar {
+  width: 2rem;
+  height: 0.25rem;
+  background-color: #f4f4f4; /* Cambia esto por tu color deseado */
+  border-radius: 10px;
+  transition: all 0.3s linear; /* La clave: suaviza el cambio */
+  position: relative;
+  transform-origin: 1px; /* Para que roten desde el borde izquierdo */
 }
 
-.hamburger.open span:nth-child(1) {
-  transform: translateX(18px) rotate(35deg) translateY(-1px);
+/* --- Transformación cuando está abierto (Clase .open) --- */
+
+/* Primera línea: Rota 45 grados */
+.hamburger.open .bar:nth-child(1) {
+  transform: rotate(45deg);
 }
 
-.hamburger.open span:nth-child(2) {
+/* Segunda línea: Se desvanece y se mueve a un lado */
+.hamburger.open .bar:nth-child(2) {
   opacity: 0;
+  transform: translateX(20px);
 }
 
-.hamburger.open span:nth-child(3) {
-  transform: translateX(-10px) rotate(-34deg) translateY(-1px);
+/* Tercera línea: Rota -45 grados */
+.hamburger.open .bar:nth-child(3) {
+  transform: rotate(-45deg);
 }
 
 /* MOBILE */
 @media (max-width: 768px) {
   .hamburger {
-    display: block;
+    display: flex;
   }
 
    .nav-links {

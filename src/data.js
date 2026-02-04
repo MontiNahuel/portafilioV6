@@ -114,11 +114,12 @@ export const estudios = [
         id: 0,
         nombreEstudio: "Tecnicatura Universitaria en Desarrollo de Software",
         lugarEstudio: "Universidad Argentina de la Empresa",
-        fechaInicio: "2023",
-        fechaFin: "2025 (Estimado)",
-        estado: "En-curso",
+        fechaInicio: "Mar 2023",
+        fechaFin: "Nov 2025",
+        estado: "Egresado",
         logoInstitucion: imagenUADE,
-        verMas: "https://www.uade.edu.ar/facultad-de-ingenieria-y-ciencias-exactas/tecnicatura-universitaria-en-desarrollo-de-software/"
+        verMas: "https://www.uade.edu.ar/facultad-de-ingenieria-y-ciencias-exactas/tecnicatura-universitaria-en-desarrollo-de-software/",
+        certificado: "https://drive.google.com/file/d/1WpgR1bLltxIMQrvR6Cwr7Bj4PwESMGQT/view?usp=drive_link"
     },
     {
         id: 1,

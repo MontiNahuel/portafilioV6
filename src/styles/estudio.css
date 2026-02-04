@@ -22,6 +22,7 @@
     justify-content: space-around;
     align-items: center;
     flex-direction: column;
+    overflow: hidden;
   }
 
 
@@ -35,8 +36,9 @@
     max-height: 100%; /* Asegura que no sea más alto que el contenedor */
     opacity: 0;
     transition: opacity 0.3s ease;
-    z-index: 0;
+    z-index: -1;
     object-fit: contain; /* Para que la imagen se ajuste dentro sin recortar y manteniendo su proporción */
+    pointer-events: none;
   }
 
   .estudio__info:hover .estudio__icono__fondo {
@@ -136,9 +138,19 @@
     padding: 8px 12px;
     border-radius: 5px;
     display: inline-block;
+    z-index: 1;
   }
   
   /* Colores según el estado del estudio */
+  .estudio__status--egresado {
+    /* De verde menta a verde bosque */
+    color: rgb(255, 236, 63);
+    background-color: rgb(31, 31, 31);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2); /* Sombra al texto para legibilidad */
+    transition: all 0.4s;
+    border: 2px solid rgba(161, 145, 0, 0.384);
+  }
+
   .estudio__status--completado {
     background-color: #4caf50;
     color: white;

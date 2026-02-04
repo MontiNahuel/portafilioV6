@@ -24,14 +24,14 @@ export default function Navbar() {
 
         {/* Botón hamburguesa (solo visible en mobile por CSS) */}
         <button
-          className={`hamburger ${menuOpen ? "open" : ""}`}
+          className={`hamburger ${menuOpen ? "open" : ""}`} // Añadimos la clase 'open' cuando es true
           onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Abrir menú"
+          aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
           aria-expanded={menuOpen}
         >
-          <span>|</span>
-          <span>|</span>
-          <span>|</span>
+          <span className="bar"></span>
+          <span className="bar"></span>
+          <span className="bar"></span>
         </button>
 
         <ul className={`nav-links ${menuOpen ? "active" : ""}`}>
