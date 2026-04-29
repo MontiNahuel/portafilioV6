@@ -1,47 +1,154 @@
 import { useState, useEffect } from "react";
-import "../styles/navbar.css"; // Importamos el archivo de estilos
-import logoPortafolio from "../assets/icons/portafolio.svg";
+
 export default function Navbar() {
   const [scrolling, setScrolling] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("inicio"); // Estado para el Scrollspy
 
   useEffect(() => {
+    // 1. Lógica del fondo del Navbar al hacer scroll
     const handleScroll = () => {
-      setScrolling(window.scrollY > 50);
+      setScrolling(window.scrollY > 40);
+    };
+    window.addEventListener("scroll", handleScroll);
+
+    // 2. Lógica del IntersectionObserver para el Scrollspy
+    const observerOptions = {
+      root: null,
+      rootMargin: "-50% 0px -50% 0px", // Se activa cuando la sección llega a la mitad de la pantalla
+      threshold: 0,
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    }, observerOptions);
+
+    // Observar todas las secciones que tengan un ID
+    const sections = document.querySelectorAll("section[id]");
+    sections.forEach((section) => observer.observe(section));
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      sections.forEach((section) => observer.unobserve(section));
+    };
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : "auto";
+    if (menuOpen) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
   }, [menuOpen]);
 
-  return (
-    <nav className={`navbar ${scrolling ? "scrolled" : ""}`}>
-      <div className="nav-container">
-        <img className="logo" src={logoPortafolio} alt="Logo de portafolio" />
+  // Agregamos la propiedad 'id' para que coincida con las secciones HTML
+  const navLinks = [
+    { name: "Inicio", href: "#inicio", id: "inicio" },
+    { name: "Proyectos", href: "#proyectos", id: "proyectos" },
+    { name: "Sobre Mí", href: "#sobre-mi", id: "sobre-mi" }, 
+    { name: "Estudios", href: "#estudios", id: "estudios" },
+  ];
 
-        {/* Botón hamburguesa (solo visible en mobile por CSS) */}
+  return (
+    <nav
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-in-out ${
+        scrolling
+          ? "bg-slate-950/85 backdrop-blur-md shadow-2xl shadow-sky-900/10 py-4 border-b border-slate-800/60"
+          : "bg-transparent py-7"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center antialiased">
+        {/* Logo Area */}
+        <a href="#inicio" className="z-[60] relative flex items-center gap-2.5 group">
+          <span className="text-sky-400 font-mono font-bold text-2xl group-hover:text-sky-300 transition-colors">
+            ~/
+          </span>
+          <span className="text-slate-100 font-bold text-xl tracking-tighter flex items-center">
+            Nahuel <span className="text-slate-400 font-light"> Monti</span>
+            {/* Cursor parpadeante */}
+            <span className="inline-block w-2.5 h-6 ml-1.5 bg-sky-400 animate-pulse opacity-80"></span>
+          </span>
+        </a>
+
+        {/* Desktop Links */}
+        <div className="hidden md:flex items-center gap-1.5 rounded-full p-1.5 bg-slate-900/50 border border-slate-800/60">
+          {navLinks.map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              className={`px-5 py-2 rounded-full text-sm font-medium tracking-wide transition-all duration-300 ${
+                activeSection === link.id
+                  ? "text-sky-400 bg-slate-800/80 shadow-inner" // Estilo Activo Premium
+                  : "text-slate-300 hover:text-white hover:bg-slate-800/40" // Estilo Inactivo
+              }`}
+            >
+              {link.name}
+            </a>
+          ))}
+        </div>
+
+        {/* CTA Button (Desktop) */}
+        <a
+          href="#contacto"
+          className="hidden md:inline-flex items-center justify-center px-6 py-2.5 rounded-full bg-sky-400 text-slate-950 font-bold text-sm tracking-wide hover:bg-sky-300 hover:shadow-[0_0_20px_rgba(56,189,248,0.5)] hover:scale-105 transition-all duration-300"
+        >
+          Contactar
+        </a>
+
+        {/* Hamburger Button (Mobile) */}
         <button
-          className={`hamburger ${menuOpen ? "open" : ""}`} // Añadimos la clase 'open' cuando es true
+          className="md:hidden z-[60] relative w-11 h-11 flex items-center justify-center rounded-xl bg-slate-800/50 border border-slate-700/50 focus:outline-none"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
-          aria-expanded={menuOpen}
         >
-          <span className="bar"></span>
-          <span className="bar"></span>
-          <span className="bar"></span>
+          <div className="relative w-6 h-5">
+            <span
+              className={`absolute block w-6 h-0.5 bg-slate-100 rounded-full transition-all duration-300 ease-in-out ${
+                menuOpen ? "rotate-45 top-2.5" : "top-0"
+              }`}
+            ></span>
+            <span
+              className={`absolute block h-0.5 bg-slate-100 rounded-full transition-all duration-300 ease-in-out top-2 rounded ${
+                menuOpen ? "w-0 opacity-0" : "w-6 opacity-100"
+              }`}
+            ></span>
+            <span
+              className={`absolute block w-6 h-0.5 bg-slate-100 rounded-full transition-all duration-300 ease-in-out ${
+                menuOpen ? "-rotate-45 top-2.5" : "top-4"
+              }`}
+            ></span>
+          </div>
         </button>
 
-        <ul className={`nav-links ${menuOpen ? "active" : ""}`}>
-          <li><button className="boton-navbar" onClick={() => setMenuOpen(false)}><a href="#inicio">Inicio</a></button></li>
-          <li><button className="boton-navbar" onClick={() => setMenuOpen(false)}><a href="#proyectos">Proyectos</a></button></li>
-          <li><button className="boton-navbar" onClick={() => setMenuOpen(false)}><a href="#sobre mi">Sobre Mi</a></button></li>
-          <li><button className="boton-navbar" onClick={() => setMenuOpen(false)}><a href="#estudios">Estudios</a></button></li>
-          <li><button className="boton-navbar" onClick={() => setMenuOpen(false)}><a href="#contacto">Contacto</a></button></li>
-        </ul>
+        {/* Mobile Menu Overlay */}
+        <div
+          className={`fixed inset-0 min-h-screen bg-slate-950 flex flex-col items-center justify-center transition-all duration-500 ease-in-out ${
+            menuOpen ? "opacity-100 translate-x-0" : "opacity-0 translate-x-full"
+          } md:hidden`}
+        >
+          <ul className="flex flex-col items-center gap-8 text-3xl font-light text-slate-100 tracking-tight">
+            {navLinks.map((link) => (
+              <li key={link.name}>
+                <a
+                  href={link.href}
+                  onClick={() => setMenuOpen(false)}
+                  className="hover:text-sky-400 transition-colors"
+                >
+                  {link.name}
+                </a>
+              </li>
+            ))}
+             <li className="mt-6">
+                 <a href="#contacto" onClick={() => setMenuOpen(false)} className="px-10 py-4 rounded-full bg-sky-400 text-slate-950 font-semibold text-xl shadow-[0_0_15px_rgba(59,130,246,0.3)]">
+                     Contactar
+                 </a>
+             </li>
+          </ul>
+        </div>
       </div>
     </nav>
   );

@@ -8,7 +8,7 @@ import imagenRedHat from "../src/assets/icons/redhatV6.png";
 import imagenIbm from "../src/assets/icons/ibm.png";
 import imagenSqlServer from "../src/assets/icons/sql-server.svg";
 import imagenJava from "../src/assets/icons/java.svg";
-import imagenSpringBoot from "../src/assets/icons/springboot.svg";
+import imagenSpringBoot from "../src/assets/icons/springbootV2.svg";
 import imagenReact from "../src/assets/icons/react-native.svg";
 import imagenJavaScript from "../src/assets/icons/javascript.svg";
 import imagenElectron from "../src/assets/icons/electron.svg";
@@ -150,7 +150,7 @@ export const estudios = [
         fechaFin: "Dic 2024",
         estado: "Completado",
         logoInstitucion: imagenRedHat,
-        distintaOpacidad: true,
+        //distintaOpacidad: true,
         verMas: "https://www.redhat.com/en",
         certificado: "https://drive.google.com/file/d/1t7J0OrVKMOp6Dw5-J-TSLNgoyNAkaP1v/view"
     },
@@ -162,7 +162,7 @@ export const estudios = [
         fechaFin: "Dic 2025 (Estimado)",
         estado: "En-curso",
         logoInstitucion: imagenIbm,
-        distintaOpacidad: true,
+        //distintaOpacidad: true,
         verMas: "https://skillsbuild.org/",
     }
 ];
