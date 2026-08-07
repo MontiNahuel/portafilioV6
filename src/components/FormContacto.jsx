@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import emailjs from "@emailjs/browser";
+import { useToast } from "../context/ToastContext";
 
 export default function FormContacto() {
+  const { showToast } = useToast();
   const [formData, setFormData] = useState({
     nombre: "",
     email: "",
@@ -9,7 +11,7 @@ export default function FormContacto() {
   });
   
   const [status, setStatus] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false); // Nuevo estado para el loading
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -23,22 +25,24 @@ export default function FormContacto() {
     const serviceID = "service_nx62bss"; 
     const templateID = "template_3431zyk"; 
     const publicKey = "FjktPO1SA97E1SEF7"; 
-  
+
     const templateParams = {
       from_name: formData.nombre,
       from_email: formData.email,
       message: formData.mensaje,
     };
-  
+
     emailjs
       .send(serviceID, templateID, templateParams, publicKey)
       .then(() => {
         setStatus("success");
+        showToast("¡Mensaje enviado con éxito! Te responderé pronto. 🎉", "success", 4000);
         setFormData({ nombre: "", email: "", mensaje: "" });
       })
       .catch((error) => {
         console.error("Error al enviar el correo", error);
         setStatus("error");
+        showToast("Ocurrió un error al enviar el mensaje. Intenta por otro medio.", "error", 4000);
       })
       .finally(() => {
         setIsSubmitting(false);
