@@ -32,7 +32,9 @@ export default function Footer() {
 
           {/* Redes Sociales / Links Externos */}
           <ul className="flex items-center gap-4">
-            {hipervFooter[1].map((hipervinculo, index) => (
+            {hipervFooter[1].map((hipervinculo, index) => {
+              const Icono = hipervinculo.icono;
+              return (
               <li key={index}>
                 <a 
                   href={hipervinculo.url} 
@@ -41,15 +43,10 @@ export default function Footer() {
                   rel="noreferrer noopener"
                   aria-label="Enlace a red social"
                 >
-                  <img 
-                    src={hipervinculo.icono} 
-                    alt="" 
-                    // El filtro mágico para que los íconos (como LinkedIn o GitHub) se vean blancos y brillen al hover
-                    className="w-5 h-5 object-contain filter brightness-0 invert opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all"
-                  />
+                  <Icono className="w-5 h-5 text-slate-400 group-hover:text-white group-hover:scale-110 transition-all" />
                 </a>
               </li>
-            ))}
+            )})}
           </ul>
         </div>
 
