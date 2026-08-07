@@ -21,7 +21,7 @@ function AboutMe() {
           
           <div className="space-y-5 text-slate-400 text-lg font-light leading-relaxed">
             <p>
-              Soy un desarrollador web que disfruta de la programación y la creación de aplicaciones web eficientes y escalables. 
+              Soy un <strong className="font-semibold text-slate-200">Software Engineer</strong> enfocado en la programación y el diseño de aplicaciones web modernas, eficientes y escalables. 
             </p>
             <p>
               Me apasiona resolver problemas complejos, aprender herramientas nuevas constantemente y, sobre todo, compartir mis conocimientos técnicos con otras personas para crecer en comunidad.
@@ -68,18 +68,12 @@ function TecnologiasMasUsadas() {
 }
 
 // --- SUB-COMPONENTE: ITEM DE TECNOLOGÍA ---
-function Tecnologia({ tecnologiaImagen, tecnologiaNombre }) {
+function Tecnologia({ tecnologiaImagen: IconoTech, tecnologiaNombre }) {
   return (
     <li className="flex flex-col items-center justify-center gap-3 p-4 bg-slate-900/50 border border-slate-800/80 rounded-xl hover:border-sky-400/50 hover:bg-slate-800/80 hover:-translate-y-1 transition-all duration-300 group/tech">
       <div className="w-10 h-10 flex items-center justify-center">
-        {tecnologiaImagen ? (
-          <img 
-            src={tecnologiaImagen} 
-            alt={tecnologiaNombre} 
-            // 1. Estado Base: 'brightness-0 invert' lo hace blanco puro, 'opacity-50' lo vuelve un gris claro muy sutil.
-            // 2. Estado Hover: Restauramos opacity a 100 y aplicamos el cálculo exacto de filtro para llegar al #38bdf8 (sky-400 de Tailwind)
-            className="w-8 h-8 object-contain filter brightness-0 invert opacity-50 group-hover/tech:opacity-100 group-hover/tech:[filter:invert(63%)_sepia(90%)_saturate(2975%)_hue-rotate(174deg)_brightness(102%)_contrast(105%)] transition-all duration-300" 
-          />
+        {IconoTech ? (
+          <IconoTech className="w-8 h-8 text-slate-500 group-hover/tech:text-sky-400 transition-all duration-300" />
         ) : (
           <div className="w-8 h-8 bg-slate-700 rounded-full animate-pulse"></div>
         )}

@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import { useToast } from "../context/ToastContext";
 
 export default function Intro({ backgroundImage }) {
   const [fadeIn, setFadeIn] = useState(false);
+  const { showToast } = useToast();
 
   useEffect(() => {
     // Añadimos un pequeño retraso para que la animación se aprecie
@@ -11,6 +13,10 @@ export default function Intro({ backgroundImage }) {
     }, 100);
     return () => clearTimeout(timer);
   }, []);
+
+  const handleDownloadCV = () => {
+    showToast("¡Abriendo CV de Nahuel Monti!", "download");
+  };
 
   return (
     <section 
@@ -52,9 +58,9 @@ export default function Intro({ backgroundImage }) {
           </span>
         </h1>
 
-        {/* Descripción (Podrías sumar Python/FastAPI aquí si quieres!) */}
+        {/* Descripción */}
         <p className="text-lg md:text-2xl text-slate-400 mb-10 max-w-2xl font-light leading-relaxed">
-          Desarrollador web <strong className="font-semibold text-slate-200">Full Stack</strong> especializado en React y Java.
+          <strong className="font-semibold text-slate-200">Software Engineer</strong> especializado en React, FastAPI y Java.
         </p>
 
         {/* Botones */}
@@ -72,6 +78,7 @@ export default function Intro({ backgroundImage }) {
             href="https://drive.google.com/file/d/1LbKeph3wkNfbEqQ099qYSTc5WHPoDslh/view?usp=sharing" 
             target="_blank" 
             rel="noopener noreferrer" 
+            onClick={handleDownloadCV}
             className="w-full sm:w-auto inline-flex justify-center items-center px-8 py-3.5 rounded-full bg-slate-900/50 border border-slate-700 text-slate-300 font-bold text-base tracking-wide hover:border-sky-400 hover:text-sky-400 hover:bg-slate-800/80 hover:scale-105 transition-all duration-300 backdrop-blur-sm"
           >
             {/* Ícono de descarga en SVG */}
