@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
+import { useToast } from "../context/ToastContext";
 
 export default function Navbar() {
   const [scrolling, setScrolling] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("inicio"); // Estado para el Scrollspy
+  const { showToast } = useToast();
 
   useEffect(() => {
     // 1. Lógica del fondo del Navbar al hacer scroll
@@ -44,6 +46,11 @@ export default function Navbar() {
       document.body.classList.remove("overflow-hidden");
     }
   }, [menuOpen]);
+
+  const handleDownloadCV = () => {
+    showToast("¡Abriendo CV de Nahuel Monti!", "download");
+    if (menuOpen) setMenuOpen(false);
+  };
 
   // Agregamos la propiedad 'id' para que coincida con las secciones HTML
   const navLinks = [
@@ -91,13 +98,30 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* CTA Button (Desktop) */}
-        <a
-          href="#contacto"
-          className="hidden md:inline-flex items-center justify-center px-6 py-2.5 rounded-full bg-sky-400 text-slate-950 font-bold text-sm tracking-wide hover:bg-sky-300 hover:shadow-[0_0_20px_rgba(56,189,248,0.5)] hover:scale-105 transition-all duration-300"
-        >
-          Contactar
-        </a>
+        {/* Action Buttons (Desktop) */}
+        <div className="hidden md:flex items-center gap-3">
+          {/* Botón Descargar CV */}
+          <a
+            href="https://drive.google.com/file/d/1LbKeph3wkNfbEqQ099qYSTc5WHPoDslh/view?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={handleDownloadCV}
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-slate-900/60 border border-slate-700/80 text-slate-300 font-semibold text-xs tracking-wide hover:border-sky-400 hover:text-sky-400 hover:bg-slate-800/80 transition-all duration-300 backdrop-blur-sm"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+            CV
+          </a>
+
+          {/* Botón Contactar */}
+          <a
+            href="#contacto"
+            className="inline-flex items-center justify-center px-6 py-2.5 rounded-full bg-sky-400 text-slate-950 font-bold text-sm tracking-wide hover:bg-sky-300 hover:shadow-[0_0_20px_rgba(56,189,248,0.5)] hover:scale-105 transition-all duration-300"
+          >
+            Contactar
+          </a>
+        </div>
 
         {/* Hamburger Button (Mobile) */}
         <button
@@ -130,7 +154,7 @@ export default function Navbar() {
             menuOpen ? "opacity-100 translate-x-0" : "opacity-0 translate-x-full"
           } md:hidden`}
         >
-          <ul className="flex flex-col items-center gap-8 text-3xl font-light text-slate-100 tracking-tight">
+          <ul className="flex flex-col items-center gap-6 text-2xl font-light text-slate-100 tracking-tight">
             {navLinks.map((link) => (
               <li key={link.name}>
                 <a
@@ -142,11 +166,27 @@ export default function Navbar() {
                 </a>
               </li>
             ))}
-             <li className="mt-6">
-                 <a href="#contacto" onClick={() => setMenuOpen(false)} className="px-10 py-4 rounded-full bg-sky-400 text-slate-950 font-semibold text-xl shadow-[0_0_15px_rgba(59,130,246,0.3)]">
-                     Contactar
-                 </a>
-             </li>
+            <li className="mt-4 flex flex-col gap-4 w-full px-12">
+              <a
+                href="https://drive.google.com/file/d/1LbKeph3wkNfbEqQ099qYSTc5WHPoDslh/view?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={handleDownloadCV}
+                className="flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-slate-900 border border-slate-700 text-slate-200 font-semibold text-lg"
+              >
+                <svg className="w-5 h-5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                Descargar CV
+              </a>
+              <a 
+                href="#contacto" 
+                onClick={() => setMenuOpen(false)} 
+                className="flex items-center justify-center px-8 py-3.5 rounded-full bg-sky-400 text-slate-950 font-bold text-lg shadow-[0_0_15px_rgba(59,130,246,0.3)]"
+              >
+                Contactar
+              </a>
+            </li>
           </ul>
         </div>
       </div>
