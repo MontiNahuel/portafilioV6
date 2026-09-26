@@ -6,7 +6,7 @@ export default function DatosContacto() {
   return (
     <div className="flex flex-col gap-4 w-full">
       {datosContacto.map((dato) => (
-        <ContactoIndividual key={dato.tipo} tipo={dato.tipo} contacto={dato.contacto} />
+        <ContactoIndividual key={dato.tipo} tipo={dato.tipo} contacto={dato.contacto} url={dato.url} />
       ))}
     </div>
   );

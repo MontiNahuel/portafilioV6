@@ -1,14 +1,18 @@
-import React, { useState, useEffect, startTransition, ViewTransition } from "react";
-import { proyectos, proyectosIntroduccion, proyectosDestacados } from "../data";
+import React, { useState, useEffect, startTransition } from "react";
 import { FaGithub } from "react-icons/fa";
+import { useTheme } from "../context/ThemeContext";
+import { useLanguage } from "../context/LanguageContext";
 
 // --- COMPONENTE MODAL (VISTA DETALLADA) ---
 export default function ProyectoModal({ id, onClose }) {
+  const { isV2 } = useTheme();
+  const { t, proyectos, proyectosIntroduccion, proyectosDestacados } = useLanguage();
+
   // Buscamos el proyecto en los distintos arreglos según su id
   const proyecto = 
-    proyectosDestacados.find(p => p.id === id) ||
-    proyectos.find(p => p.id === id) || 
-    proyectosIntroduccion.find(p => p.id === id);
+    (proyectosDestacados && proyectosDestacados.find(p => p.id === id)) ||
+    (proyectos && proyectos.find(p => p.id === id)) || 
+    (proyectosIntroduccion && proyectosIntroduccion.find(p => p.id === id));
 
   const [isClosing, setIsClosing] = useState(false);
   const [activeTab, setActiveTab] = useState("resumen");
@@ -87,15 +91,14 @@ export default function ProyectoModal({ id, onClose }) {
 
   // Definición dinámica de las pestañas
   const availableTabs = [
-    { id: "resumen", label: "Visión General" },
-    ...(proyecto.arquitectura ? [{ id: "arquitectura", label: "Arquitectura y Retos" }] : []),
-    ...(proyecto.galeria?.length > 0 ? [{ id: "galeria", label: "Galería" }] : []),
-    { id: "detalles", label: "Stack & Enlaces" }
+    { id: "resumen", label: t("projects.modal.tabResumen") },
+    ...(proyecto.arquitectura ? [{ id: "arquitectura", label: t("projects.modal.tabArquitectura") }] : []),
+    ...(proyecto.galeria?.length > 0 ? [{ id: "galeria", label: t("projects.modal.tabGaleria") }] : []),
+    { id: "detalles", label: t("projects.modal.tabDetalles") }
   ];
 
   return (
     <div 
-      // Elevamos el z-index a 9999 por las dudas, y usamos items-start + pt-20 para bajar el modal respecto a la navbar
       className="fixed inset-0 z-[9999] flex items-start justify-center pt-24 px-4 pb-4 sm:pt-28 sm:px-6 sm:pb-6"
       onClick={handleClose} 
     >
@@ -120,8 +123,7 @@ export default function ProyectoModal({ id, onClose }) {
       
       {/* Contenedor del Modal */}
       <div 
-        // Cambié el alto a h-[calc(100vh-7rem)] para que respete el margen superior que le dimos (pt-24/28)
-        className={`relative w-full max-w-4xl bg-slate-900 border border-slate-700/50 rounded-2xl shadow-2xl shadow-sky-900/20 flex flex-col h-[calc(100vh-7rem)] sm:h-[calc(100vh-9rem)] overflow-hidden ${
+        className={`relative w-full max-w-4xl bg-slate-900 border border-slate-700/50 rounded-2xl shadow-2xl ${isV2 ? 'shadow-indigo-950/40' : 'shadow-sky-900/20'} flex flex-col h-[calc(100vh-7rem)] sm:h-[calc(100vh-9rem)] overflow-hidden ${
           isClosing ? "anim-modal-out" : "anim-modal-in"
         }`}
         onClick={(e) => e.stopPropagation()}
@@ -129,7 +131,9 @@ export default function ProyectoModal({ id, onClose }) {
         {/* Botón Cerrar */}
         <button 
           onClick={handleClose}
-          className="absolute top-4 right-4 z-50 p-2 rounded-full bg-slate-900/80 border border-slate-700 text-slate-300 hover:text-white hover:bg-sky-500 hover:border-sky-500 transition-all backdrop-blur-md shadow-lg group/close"
+          className={`absolute top-4 right-4 z-50 p-2 rounded-full bg-slate-900/80 border border-slate-700 text-slate-300 transition-all backdrop-blur-md shadow-lg group/close ${
+            isV2 ? 'hover:text-white hover:bg-indigo-500 hover:border-indigo-500' : 'hover:text-white hover:bg-sky-500 hover:border-sky-500'
+          }`}
         >
           <svg className="w-5 h-5 group-hover/close:rotate-90 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -150,14 +154,14 @@ export default function ProyectoModal({ id, onClose }) {
             
             <div className="absolute bottom-6 left-6 right-16">
               {proyecto.duracion && (
-                <div className="flex items-center gap-2 text-sky-400 text-sm font-mono mb-2 tracking-wide">
+                <div className={`flex items-center gap-2 text-sm font-mono mb-2 tracking-wide ${isV2 ? 'text-indigo-400 font-medium' : 'text-sky-400'}`}>
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
                   {proyecto.duracion}
                 </div>
               )}
-              <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-100 tracking-tight drop-shadow-lg leading-tight">
+              <h2 className={`text-2xl sm:text-4xl text-slate-100 tracking-tight drop-shadow-lg leading-tight ${isV2 ? 'font-medium font-jakarta' : 'font-extrabold'}`}>
                 {proyecto.nombreProyecto}
               </h2>
             </div>
@@ -169,9 +173,9 @@ export default function ProyectoModal({ id, onClose }) {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-4 py-4 text-sm font-medium transition-all border-b-2 -mb-[1px] ${
+                className={`px-4 py-4 text-sm font-medium transition-all border-b-2 -mb-[1px] ${isV2 ? 'font-jakarta' : ''} ${
                   activeTab === tab.id 
-                    ? "border-sky-500 text-sky-400" 
+                    ? isV2 ? "border-indigo-400 text-indigo-300 font-medium" : "border-sky-500 text-sky-400" 
                     : "border-transparent text-slate-400 hover:text-slate-200 hover:border-slate-600"
                 }`}
               >
@@ -186,7 +190,7 @@ export default function ProyectoModal({ id, onClose }) {
             {/* Pestaña: Resumen */}
             {activeTab === "resumen" && (
               <div className="flex flex-col h-full anim-tab-in">
-                <div className="text-slate-300 space-y-4 leading-relaxed font-light text-base sm:text-lg mb-8">
+                <div className={`text-slate-300 space-y-4 leading-relaxed font-light text-base sm:text-lg mb-8 ${isV2 ? 'font-jakarta' : ''}`}>
                   {proyecto.descripcionProyecto.split("\n").map((parrafo, index) => (
                     <p key={index}>{parrafo}</p>
                   ))}
@@ -199,7 +203,11 @@ export default function ProyectoModal({ id, onClose }) {
                       href={proyecto.enlaceServicio.url} 
                       target="_blank" 
                       rel="noreferrer"
-                      className="group flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white font-bold rounded-xl shadow-[0_0_20px_rgba(14,165,233,0.4)] hover:shadow-[0_0_30px_rgba(14,165,233,0.6)] transition-all hover:-translate-y-1 w-full sm:w-max"
+                      className={`group flex items-center justify-center gap-3 px-8 py-3.5 bg-slate-900 border text-white font-medium rounded-xl transition-all duration-300 w-full sm:w-max ${
+                        isV2
+                          ? 'border-indigo-400/80 font-jakarta shadow-[0_0_15px_rgba(99,102,241,0.25)] hover:bg-indigo-500/20 hover:border-indigo-300 hover:shadow-[0_0_25px_rgba(99,102,241,0.5)]'
+                          : 'border-sky-400 font-bold shadow-[0_0_15px_rgba(56,189,248,0.25)] hover:bg-sky-500/20 hover:border-sky-300 hover:shadow-[0_0_25px_rgba(56,189,248,0.5)]'
+                      }`}
                     >
                       <span>{proyecto.enlaceServicio.nombre}</span>
                       <svg className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -216,8 +224,8 @@ export default function ProyectoModal({ id, onClose }) {
               <div className="anim-tab-in">
                 <ul className="space-y-4">
                   {proyecto.arquitectura.map((item, index) => (
-                    <li key={index} className="flex gap-4 text-slate-300 font-light leading-relaxed bg-slate-800/20 p-4 rounded-xl border border-slate-800/50">
-                      <span className="text-sky-500 mt-0.5 shrink-0">
+                    <li key={index} className={`flex gap-4 text-slate-300 font-light leading-relaxed bg-slate-800/20 p-4 rounded-xl border border-slate-800/50 ${isV2 ? 'font-jakarta' : ''}`}>
+                      <span className={`${isV2 ? 'text-indigo-400' : 'text-sky-500'} mt-0.5 shrink-0`}>
                         <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
@@ -251,10 +259,10 @@ export default function ProyectoModal({ id, onClose }) {
                         alt={caption || `Captura ${index + 1}`} 
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       />
-                      <div className="absolute inset-0 bg-slate-900/0 group-hover:bg-sky-900/20 transition-all pointer-events-none"></div>
+                      <div className={`absolute inset-0 bg-slate-900/0 ${isV2 ? 'group-hover:bg-indigo-900/20' : 'group-hover:bg-sky-900/20'} transition-all pointer-events-none`}></div>
                       {caption && (
                         <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-slate-950 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                          <p className="text-white text-sm font-medium truncate">{caption}</p>
+                          <p className={`text-white text-sm font-medium truncate ${isV2 ? 'font-jakarta' : ''}`}>{caption}</p>
                         </div>
                       )}
                     </div>
@@ -269,17 +277,17 @@ export default function ProyectoModal({ id, onClose }) {
                 
                 {/* Tecnologías */}
                 <div>
-                  <h3 className="text-xs font-bold text-sky-400 tracking-widest uppercase mb-4">
-                    Stack Tecnológico
+                  <h3 className={`text-xs font-bold tracking-widest uppercase mb-4 ${isV2 ? 'text-indigo-400 font-mono' : 'text-sky-400'}`}>
+                    {t("projects.modal.stack")}
                   </h3>
                   <div className="flex flex-wrap gap-2.5">
                     {proyecto.tecnologias?.map((tecnologia, index) => (
                       <div 
                         key={index} 
-                        className="flex items-center gap-2.5 px-3 py-2 bg-slate-800/40 border border-slate-700/80 rounded-lg shadow-inner"
+                        className={`flex items-center gap-2.5 px-3 py-2 bg-slate-800/40 border border-slate-700/80 rounded-lg shadow-inner ${isV2 ? 'font-jakarta' : ''}`}
                       >
                         {tecnologia.icono && (
-                          <tecnologia.icono className="w-5 h-5 text-slate-100 opacity-90" />
+                          <tecnologia.icono className={`w-5 h-5 text-slate-100 opacity-90 ${isV2 ? 'group-hover:text-indigo-300' : ''}`} />
                         )}
                         <span className="text-sm font-medium text-slate-100">{tecnologia.nombre}</span>
                       </div>
@@ -293,19 +301,23 @@ export default function ProyectoModal({ id, onClose }) {
                   {/* Acceso al Servicio */}
                   {proyecto.enlaceServicio && (
                     <div>
-                      <h3 className="text-xs font-bold text-emerald-400 tracking-widest uppercase mb-3">
-                        Acceso al Servicio
+                      <h3 className={`text-xs font-bold tracking-widest uppercase mb-3 ${isV2 ? 'text-indigo-400 font-mono' : 'text-sky-400'}`}>
+                        {t("projects.modal.accessLive")}
                       </h3>
                       <a
                         href={proyecto.enlaceServicio.url}
                         target="_blank"
                         rel="noreferrer"
-                        className="group/live flex items-center justify-between px-4 py-3 bg-emerald-500/10 border border-emerald-500/30 rounded-lg hover:bg-emerald-500/20 hover:border-emerald-400 transition-all shadow-[0_0_15px_rgba(16,185,129,0.15)]"
+                        className={`group/live flex items-center justify-between px-4 py-3 bg-slate-900 border rounded-lg transition-all ${
+                          isV2 
+                            ? 'border-indigo-400/80 hover:bg-indigo-500/20 hover:border-indigo-300 shadow-[0_0_15px_rgba(99,102,241,0.2)] font-jakarta' 
+                            : 'border-sky-400/80 hover:bg-sky-500/20 hover:border-sky-300 shadow-[0_0_15px_rgba(56,189,248,0.2)]'
+                        }`}
                       >
-                        <span className="text-sm font-bold text-emerald-400 group-hover/live:text-emerald-300">
+                        <span className={`text-sm font-bold text-white ${isV2 ? 'group-hover/live:text-indigo-300' : 'group-hover/live:text-sky-300'}`}>
                           {proyecto.enlaceServicio.nombre}
                         </span>
-                        <svg className="w-5 h-5 text-emerald-500 group-hover/live:text-emerald-400 group-hover/live:scale-110 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg className={`w-5 h-5 group-hover/live:scale-110 transition-all ${isV2 ? 'text-indigo-400' : 'text-sky-400'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                         </svg>
                       </a>
@@ -314,8 +326,8 @@ export default function ProyectoModal({ id, onClose }) {
 
                   {/* Repositorios */}
                   <div>
-                    <h3 className="text-xs font-bold text-sky-400 tracking-widest uppercase mb-3">
-                      Repositorios
+                    <h3 className={`text-xs font-bold tracking-widest uppercase mb-3 ${isV2 ? 'text-indigo-400 font-mono' : 'text-sky-400'}`}>
+                      {t("projects.modal.repos")}
                     </h3>
                     <div className="flex flex-col gap-3">
                       {proyecto.enlaces && proyecto.enlaces.length > 0 ? (
@@ -325,15 +337,19 @@ export default function ProyectoModal({ id, onClose }) {
                             href={enlace.url}
                             target="_blank"
                             rel="noreferrer"
-                            className="group/link flex items-center justify-between px-4 py-3 bg-slate-800/40 border border-slate-700/80 rounded-lg hover:border-sky-400 hover:bg-slate-800/60 transition-all shadow-inner"
+                            className={`group/link flex items-center justify-between px-4 py-3 bg-slate-800/40 border border-slate-700/80 rounded-lg transition-all shadow-inner ${
+                              isV2 
+                                ? 'hover:border-indigo-400/80 hover:bg-slate-800/60 font-jakarta' 
+                                : 'hover:border-sky-400 hover:bg-slate-800/60'
+                            }`}
                           >
-                            <span className="text-sm font-medium text-slate-100 group-hover/link:text-sky-400 transition-colors">
+                            <span className={`text-sm font-medium text-slate-100 transition-colors ${isV2 ? 'group-hover/link:text-indigo-300' : 'group-hover/link:text-sky-400'}`}>
                               {enlace.nombre || enlace.repositorio}
                             </span>
                             {enlace.icono ? (
-                              <enlace.icono className="w-5 h-5 text-slate-400 group-hover/link:text-sky-400 group-hover/link:drop-shadow-[0_0_8px_rgba(56,189,248,0.6)] transition-all" />
+                              <enlace.icono className={`w-5 h-5 text-slate-400 transition-all ${isV2 ? 'group-hover/link:text-indigo-300 group-hover/link:drop-shadow-[0_0_8px_rgba(99,102,241,0.6)]' : 'group-hover/link:text-sky-400 group-hover/link:drop-shadow-[0_0_8px_rgba(56,189,248,0.6)]'}`} />
                             ) : (
-                              <svg className="w-5 h-5 text-slate-400 group-hover/link:text-sky-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <svg className={`w-5 h-5 text-slate-400 transition-colors ${isV2 ? 'group-hover/link:text-indigo-300' : 'group-hover/link:text-sky-400'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                               </svg>
                             )}
@@ -342,7 +358,7 @@ export default function ProyectoModal({ id, onClose }) {
                       ) : (
                         <div className="flex items-center gap-3 px-4 py-3 bg-slate-900/50 border border-slate-800 rounded-lg text-slate-500 italic text-sm">
                           <FaGithub className="w-5 h-5 text-slate-500 opacity-50" />
-                          No hay repositorios públicos
+                          {t("projects.modal.noRepos")}
                         </div>
                       )}
                     </div>
