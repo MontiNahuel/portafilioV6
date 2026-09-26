@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <!-- Logo ASISTODO: Isotipo 'A' con Panza / Sonrisa Roja distintiva -->
+  <path fill="#ED1C24" fill-rule="evenodd" clip-rule="evenodd" d="
+    M 39 6 
+    H 61 
+    L 82 58 
+    L 90 94 
+    H 67 
+    L 63 76 
+    C 56.5 86 43.5 86 37 76 
+    L 33 94 
+    H 10 
+    L 18 58 
+    Z
+
+    M 50 20 
+    L 42.5 48 
+    C 46.5 52.5 53.5 52.5 57.5 48 
+    Z
+  " />
+</svg>
