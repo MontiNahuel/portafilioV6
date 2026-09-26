@@ -1,11 +1,16 @@
 import { useState, useEffect } from "react";
 import { useToast } from "../context/ToastContext";
+import { useTheme } from "../context/ThemeContext";
+import { useLanguage } from "../context/LanguageContext";
+import { FlagIcon } from "./icons/Flags";
 
 export default function Navbar() {
   const [scrolling, setScrolling] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("inicio"); // Estado para el Scrollspy
   const { showToast } = useToast();
+  const { themeVersion, toggleThemeVersion, isV2 } = useTheme();
+  const { language, toggleLanguage, t } = useLanguage();
 
   useEffect(() => {
     // 1. Lógica del fondo del Navbar al hacer scroll
@@ -17,7 +22,7 @@ export default function Navbar() {
     // 2. Lógica del IntersectionObserver para el Scrollspy
     const observerOptions = {
       root: null,
-      rootMargin: "-50% 0px -50% 0px", // Se activa cuando la sección llega a la mitad de la pantalla
+      rootMargin: "-50% 0px -50% 0px",
       threshold: 0,
     };
 
@@ -29,7 +34,6 @@ export default function Navbar() {
       });
     }, observerOptions);
 
-    // Observar todas las secciones que tengan un ID
     const sections = document.querySelectorAll("section[id]");
     sections.forEach((section) => observer.observe(section));
 
@@ -48,16 +52,28 @@ export default function Navbar() {
   }, [menuOpen]);
 
   const handleDownloadCV = () => {
-    showToast("¡Abriendo CV de Nahuel Monti!", "download");
+    showToast(t("toast.openingCv"), "download");
     if (menuOpen) setMenuOpen(false);
   };
 
-  // Agregamos la propiedad 'id' para que coincida con las secciones HTML
+  const handleToggleVersion = () => {
+    const nextVer = isV2 ? "1.0 (Original)" : "2.0 (Plus Jakarta & Indigo)";
+    toggleThemeVersion();
+    showToast(`${t("toast.versionChanged")} ${nextVer}`, "info");
+  };
+
+  const handleToggleLanguage = () => {
+    toggleLanguage();
+    const nextLangName = language === "es" ? "English" : language === "en" ? "Português" : "Español";
+    showToast(`Idioma cambiado a ${nextLangName}`, "info");
+  };
+
   const navLinks = [
-    { name: "Inicio", href: "#inicio", id: "inicio" },
-    { name: "Proyectos", href: "#proyectos", id: "proyectos" },
-    { name: "Sobre Mí", href: "#sobre-mi", id: "sobre-mi" }, 
-    { name: "Estudios", href: "#estudios", id: "estudios" },
+    { name: t("nav.inicio"), href: "#inicio", id: "inicio" },
+    { name: t("nav.experiencia"), href: "#experiencia", id: "experiencia" },
+    { name: t("nav.proyectos"), href: "#proyectos", id: "proyectos" },
+    { name: t("nav.sobreMi"), href: "#sobre-mi", id: "sobre-mi" }, 
+    { name: t("nav.estudios"), href: "#estudios", id: "estudios" },
   ];
 
   return (
@@ -69,57 +85,95 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center antialiased">
-        {/* Logo Area */}
-        <a href="#inicio" className="z-[60] relative flex items-center gap-2.5 group">
-          <span className="text-sky-400 font-mono font-bold text-2xl group-hover:text-sky-300 transition-colors">
-            ~/
-          </span>
-          <span className="text-slate-100 font-bold text-xl tracking-tighter flex items-center">
-            Nahuel <span className="text-slate-400 font-light"> Monti</span>
-            {/* Cursor parpadeante */}
-            <span className="inline-block w-2.5 h-6 ml-1.5 bg-sky-400 animate-pulse opacity-80"></span>
-          </span>
-        </a>
+        {/* Columna Izquierda: Logo, v1/v2, Idioma */}
+        <div className="flex-1 flex items-center justify-start gap-1.5 sm:gap-2 z-[60] relative">
+          <a href="#inicio" className="flex items-center gap-2 group shrink-0">
+            <span className={`${isV2 ? 'text-indigo-400 group-hover:text-indigo-300' : 'text-sky-400 group-hover:text-sky-300'} font-mono font-bold text-2xl transition-colors`}>
+              ~/
+            </span>
+            <span className={`text-slate-100 font-bold text-xl tracking-tighter flex items-center whitespace-nowrap ${isV2 ? 'font-jakarta' : ''}`}>
+              Nahuel <span className="text-slate-400 font-light ml-1"> Monti</span>
+              {/* Cursor parpadeante */}
+              <span className={`inline-block w-2.5 h-6 ml-1.5 ${isV2 ? 'bg-indigo-400' : 'bg-sky-400'} animate-pulse opacity-80`}></span>
+            </span>
+          </a>
 
-        {/* Desktop Links */}
-        <div className="hidden md:flex items-center gap-1.5 rounded-full p-1.5 bg-slate-900/50 border border-slate-800/60">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className={`px-5 py-2 rounded-full text-sm font-medium tracking-wide transition-all duration-300 ${
-                activeSection === link.id
-                  ? "text-sky-400 bg-slate-800/80 shadow-inner" // Estilo Activo Premium
-                  : "text-slate-300 hover:text-white hover:bg-slate-800/40" // Estilo Inactivo
-              }`}
-            >
-              {link.name}
-            </a>
-          ))}
+          {/* Botón Conmutador de Versión v1 / v2 */}
+          <button 
+            onClick={handleToggleVersion}
+            title={t("nav.toggleVersion")}
+            className={`ml-2 px-2.5 py-1 rounded-full text-[11px] font-mono font-semibold transition-all duration-300 border flex items-center gap-1.5 cursor-pointer shrink-0 ${
+              isV2 
+                ? "bg-indigo-950/90 border-indigo-400/80 text-indigo-300 shadow-[0_0_12px_rgba(99,102,241,0.3)] hover:border-indigo-300" 
+                : "bg-sky-950/90 border-sky-500/60 text-sky-400 hover:border-sky-300"
+            }`}
+          >
+            <svg className="w-3.5 h-3.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+            </svg>
+            <span>{isV2 ? "v2.0" : "v1.0"}</span>
+          </button>
+
+          {/* Botón Conmutador de Idioma (ES / EN / PT) con banderas SVG */}
+          <button 
+            onClick={handleToggleLanguage}
+            title={t("nav.toggleLang")}
+            className={`px-2.5 py-1 rounded-full text-[11px] font-mono font-bold transition-all duration-300 border flex items-center gap-1.5 cursor-pointer shrink-0 ${
+              isV2 
+                ? "bg-indigo-950/90 border-indigo-400/80 text-indigo-300 shadow-[0_0_12px_rgba(99,102,241,0.3)] hover:border-indigo-300" 
+                : "bg-sky-950/90 border-sky-500/60 text-sky-400 hover:border-sky-300"
+            }`}
+          >
+            <FlagIcon lang={language} className="w-4 h-3 rounded-[2px] overflow-hidden shrink-0 shadow border border-slate-700/60" />
+            <span>{language.toUpperCase()}</span>
+          </button>
         </div>
 
-        {/* Action Buttons (Desktop) */}
-        <div className="hidden md:flex items-center gap-3">
+        {/* Columna Central: Navegación fija en el centro geométrico */}
+        <div className="hidden md:flex flex-1 items-center justify-center shrink-0">
+          <div className="flex items-center gap-1 rounded-full p-1.5 bg-slate-900/50 border border-slate-800/60 shadow-lg backdrop-blur-md">
+            {navLinks.map((link) => (
+              <a
+                key={link.id}
+                href={link.href}
+                className={`px-4 py-2 rounded-full text-sm font-medium tracking-wide transition-all duration-300 whitespace-nowrap ${isV2 ? 'font-jakarta' : ''} ${
+                  activeSection === link.id
+                    ? isV2 ? "text-indigo-300 bg-slate-800/90 shadow-inner border border-indigo-500/30" : "text-sky-400 bg-slate-800/80 shadow-inner"
+                    : "text-slate-300 hover:text-white hover:bg-slate-800/40"
+                }`}
+              >
+                {link.name}
+              </a>
+            ))}
+          </div>
+        </div>
+
+        {/* Columna Derecha: Botones de Acción */}
+        <div className="hidden md:flex flex-1 items-center justify-end gap-3 z-[60]">
           {/* Botón Descargar CV */}
           <a
             href="https://drive.google.com/file/d/1LbKeph3wkNfbEqQ099qYSTc5WHPoDslh/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
             onClick={handleDownloadCV}
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-slate-900/60 border border-slate-700/80 text-slate-300 font-semibold text-xs tracking-wide hover:border-sky-400 hover:text-sky-400 hover:bg-slate-800/80 transition-all duration-300 backdrop-blur-sm"
+            className={`group inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-slate-900/60 border border-slate-700/80 text-slate-300 font-semibold text-xs tracking-wide transition-all duration-300 backdrop-blur-sm whitespace-nowrap ${
+              isV2 
+                ? 'font-jakarta hover:border-indigo-400/90 hover:text-indigo-300 hover:bg-indigo-950/40 hover:shadow-[0_0_15px_rgba(99,102,241,0.3)]' 
+                : 'hover:border-sky-400 hover:text-sky-400 hover:bg-slate-800/80'
+            }`}
           >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className={`w-4 h-4 transition-colors ${isV2 ? 'text-indigo-400 group-hover:text-indigo-300' : 'text-sky-400 group-hover:text-sky-300'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
             </svg>
-            CV
+            {t("nav.cv")}
           </a>
 
           {/* Botón Contactar */}
           <a
             href="#contacto"
-            className="inline-flex items-center justify-center px-6 py-2.5 rounded-full bg-sky-400 text-slate-950 font-bold text-sm tracking-wide hover:bg-sky-300 hover:shadow-[0_0_20px_rgba(56,189,248,0.5)] hover:scale-105 transition-all duration-300"
+            className={`inline-flex items-center justify-center px-6 py-2.5 rounded-full bg-slate-900 border whitespace-nowrap ${isV2 ? 'border-indigo-400/80 text-white shadow-[0_0_15px_rgba(99,102,241,0.25)] hover:bg-indigo-500/20 hover:border-indigo-300 hover:shadow-[0_0_25px_rgba(99,102,241,0.5)] font-jakarta' : 'border-sky-400 text-white shadow-[0_0_15px_rgba(56,189,248,0.25)] hover:bg-sky-500/20 hover:border-sky-300 hover:shadow-[0_0_25px_rgba(56,189,248,0.5)]'} font-bold text-xs tracking-wide transition-all duration-300`}
           >
-            Contactar
+            {t("nav.contactar")}
           </a>
         </div>
 
@@ -156,11 +210,11 @@ export default function Navbar() {
         >
           <ul className="flex flex-col items-center gap-6 text-2xl font-light text-slate-100 tracking-tight">
             {navLinks.map((link) => (
-              <li key={link.name}>
+              <li key={link.id}>
                 <a
                   href={link.href}
                   onClick={() => setMenuOpen(false)}
-                  className="hover:text-sky-400 transition-colors"
+                  className={`transition-colors ${isV2 ? 'hover:text-indigo-300 font-jakarta' : 'hover:text-sky-400'}`}
                 >
                   {link.name}
                 </a>
@@ -172,19 +226,27 @@ export default function Navbar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={handleDownloadCV}
-                className="flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-slate-900 border border-slate-700 text-slate-200 font-semibold text-lg"
+                className={`group flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-slate-900 border border-slate-700/80 text-slate-200 font-semibold text-lg transition-all duration-300 ${
+                  isV2 
+                    ? 'font-jakarta hover:border-indigo-400/90 hover:text-indigo-300 hover:bg-indigo-950/40 hover:shadow-[0_0_20px_rgba(99,102,241,0.3)]' 
+                    : 'hover:border-sky-400 hover:text-sky-400 hover:bg-slate-800/80'
+                }`}
               >
-                <svg className="w-5 h-5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className={`w-5 h-5 transition-colors ${isV2 ? 'text-indigo-400 group-hover:text-indigo-300' : 'text-sky-400 group-hover:text-sky-300'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                 </svg>
-                Descargar CV
+                {t("nav.descargarCv")}
               </a>
               <a 
                 href="#contacto" 
                 onClick={() => setMenuOpen(false)} 
-                className="flex items-center justify-center px-8 py-3.5 rounded-full bg-sky-400 text-slate-950 font-bold text-lg shadow-[0_0_15px_rgba(59,130,246,0.3)]"
+                className={`flex items-center justify-center px-8 py-3.5 rounded-full font-bold text-lg transition-all duration-300 ${
+                  isV2
+                    ? 'bg-slate-900 border border-indigo-400/80 text-white font-jakarta shadow-[0_0_15px_rgba(99,102,241,0.25)] hover:bg-indigo-500/20 hover:border-indigo-300 hover:shadow-[0_0_25px_rgba(99,102,241,0.5)]'
+                    : 'bg-sky-400 text-slate-950 shadow-[0_0_15px_rgba(59,130,246,0.3)] hover:bg-sky-300'
+                }`}
               >
-                Contactar
+                {t("nav.contactar")}
               </a>
             </li>
           </ul>
